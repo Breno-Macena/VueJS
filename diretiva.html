@@ -9,12 +9,17 @@
 <body>
 
     <div id="app">
-        <img :src="srcImg" :title="titleImg">
-        <hr/>
-        <a :href="url">VUE.js</a>
-        <hr/>
-        <div v-text='textPar'></div>
-        <div v-html='textPar'></div>
+        <input type="text" v-model="textoDigitado"/>
+        <br>
+        <div v-if="textoDigitado == 1">
+            <img :src="srcImg" :title="titleImg"/>
+        </div>
+        <div v-else-if="textoDigitado == 2">
+            <img :src="srcImg2" :title="titleImg"/>
+        </div>
+        <div  v-else="textoDigitado == 3">
+            <img :src="srcImg3" :title="titleImg"/>
+        </div>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -22,10 +27,11 @@
         new Vue({
             el: '#app',
             data: {
+                textoDigitado: '',
                 srcImg: 'vuelogo.png',
+                srcImg2: 'vuelogo2.png',
+                srcImg3: 'vuelogo3.png',
                 titleImg: 'Logo VUE',
-                url: 'https://vuejs.org/',
-                textPar: '<b>teste <br> qualquer</b>'
             }
         })
     </script>
