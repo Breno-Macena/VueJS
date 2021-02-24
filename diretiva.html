@@ -8,10 +8,53 @@
   </head>
   <body>
     <div id="app">
-      <form @submit.prevent="alterarNome('Macena')">
-        <input type="text" v-model="textoDigitado" />
-        <button type="submit">Add</button>
-      </form>
+      <input type="text" v-model="textoDigitado" @keyup.enter="addItem()" />
+      <ul>
+        <li v-for="item in array" @click="alerta($event)">{{item}}</li>
+      </ul>
+
+      red
+      <input
+        @click="corP($event.target.value)"
+        type="radio"
+        name="cor"
+        value="red"
+        checked
+      />
+      green
+      <input
+        @click="corP($event.target.value)"
+        type="radio"
+        name="cor"
+        value="green"
+      />
+      blue
+      <input
+        @click="corP($event.target.value)"
+        type="radio"
+        name="cor"
+        value="blue"
+      />
+      yellow
+      <input
+        @click="corP($event.target.value)"
+        type="radio"
+        name="cor"
+        value="yellow"
+      />
+
+      <br><br>
+
+      <button @click="vermelho()">Vermelho</button>
+      <button @click="verde()">Verde</button>
+      <button @click="borda()">borda</button>
+      <button @click="incolor()">Incolor</button>
+
+      <p ref="firstParagraph">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, magni sint
+        aspernatur expedita deserunt similique repellat. Ipsa non mollitia saepe
+        consequatur alias nulla quisquam ducimus quia, velit eos at maxime!
+      </p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -19,11 +62,37 @@
       new Vue({
         el: "#app",
         data: {
+          classParagrafo: "red",
           textoDigitado: "",
+          array: [],
         },
         methods: {
-          alterarNome(sobrenome, event) {
-            this.textoDigitado = sobrenome;
+          addItem() {
+            this.array.push(this.textoDigitado);
+            this.textoDigitado = "";
+          },
+          alerta(event) {
+            element = event.target;
+            if (element.style.background == "red") {
+              event.target.style = "background: white";
+            } else {
+              event.target.style = "background: red";
+            }
+          },
+          corP(cor) {
+            this.classParagrafo = cor;
+          },
+          vermelho() {
+            this.$refs.firstParagraph.style.background = "red";
+          },
+          verde() {
+            this.$refs.firstParagraph.style.background = "green";
+          },
+          borda() {
+            this.$refs.firstParagraph.style.border = "2px solid black";
+          },
+          incolor() {
+            this.$refs.firstParagraph.style = "";
           },
         },
       });
